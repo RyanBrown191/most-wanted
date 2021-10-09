@@ -37,9 +37,20 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
+      alert("Gender: " + person[0].gender + " " +
+      "DOB: " + person[0].dob + " " +
+      "Height: " + person[0].height + " " +
+      "Weight: " + person[0].weight + " " +
+      "Eye Color: " + person[0].eyeColor + " " +
+      "Occupation: " + person[0].occupation); 
+
     // TODO: get person's info
     break;
     case "family":
+      let partner = people.filter(function(spouse){
+        return (spouse.id === person[0].currentSpouse);
+      }); 
+      alert("Spouse: " + partner[0].firstName + " " + partner[0].lastName + " Parents: " + person[0].parents);
     // TODO: get person's family
     break;
     case "descendants":
