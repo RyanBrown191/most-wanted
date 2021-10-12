@@ -7,11 +7,14 @@ Build all of your functions for displaying and gathering information below (GUI)
 function app(people){
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   let searchResults;
-  switch(searchType){
+    switch(searchType){
     case 'yes':
       searchResults = searchByName(people);
       break;
     case 'no':
+      searchResults = searchByTraits(people);
+      let traitsAsString = stringOfFire(searchResults); 
+       alert(traitsAsString);
       // TODO: search by traits
       break;
       default:
@@ -21,6 +24,7 @@ function app(people){
   
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
+  
 }
 
 // Menu function to call once you find who you are looking for
@@ -43,17 +47,29 @@ function mainMenu(person, people){
       "Weight: " + person[0].weight + " " +
       "Eye Color: " + person[0].eyeColor + " " +
       "Occupation: " + person[0].occupation); 
-
     // TODO: get person's info
     break;
     case "family":
       let partner = people.filter(function(spouse){
         return (spouse.id === person[0].currentSpouse);
       }); 
-      alert("Spouse: " + partner[0].firstName + " " + partner[0].lastName + " Parents: " + person[0].parents);
+      alert("Parents: " + person[0].parents); 
+      alert("Spouse: " + partner[0].firstName + " " + partner[0].lastName + "Parents: " + person[0].parents);
     // TODO: get person's family
     break;
     case "descendants":
+      // let x;
+      //  function recursiveDescendant(person){
+      //    for (people = 0; people < people.length; people++)
+      //       if (person[0].id === people.parents){
+      //         return people[0];
+      //      }
+      //      else{
+      //        return recursiveDescendant(person);
+      //      }
+      // }
+      //  let descendants = recursiveDescendant(person);
+        
     // TODO: get person's descendants
     break;
     case "restart":
@@ -65,7 +81,6 @@ function mainMenu(person, people){
     return mainMenu(person, people); // ask again
   }
 }
-
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars);
   let lastName = promptFor("What is the person's last name?", chars);
@@ -115,3 +130,70 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+
+function searchByTraits(people){
+   let foundTrait = people.filter(function(person){
+    if(person.traitChoice === traitChoice ){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  // TODO: find the person using the name they entered
+  return foundTrait;
+}
+
+function stringOfFire(array){
+  let foundPeopleString = "";
+  for(let i = 0; i < array.length; i++){
+    foundPeopleString += (array[i].firstName, " ", array[i].lastName) + "\n";
+  }
+  return foundPeopleString
+}
+
+let chooseAdventure = prompt("Would you like to search by one criterion or multiple?");
+ if (chooseAdventure = "one") {
+   let traitChoice = prompt("Select one criterion. gender, dob, height, weight, eye color, or occupation".trim());
+ }
+ else if (chooseAdventure = "multiple"){
+   // select multiple traits 
+ }
+ switch(traitChoice){
+  case "gender":
+    searchByTraits(people);
+    let genderResults = stringOfFire(foundTrait);
+    alert(genderResults);
+     //function check gender
+  break;
+  case "dob":
+    searchByTraits(people);
+    let dobResults = stringOfFire(foundTrait);
+    alert(dobResults);
+     //function check dob
+  break;
+  case "height":
+    searchByTraits(people);
+    let heightResults = stringOfFire(foundTrait);
+    alert(heightResults);
+     //function check height
+  break;
+  case "weight":
+    searchByTraits(people);
+    let weightResults = stringOfFire(foundTrait);
+    alert(weightResults);
+     //function check weight
+  break;
+  case "eye color":
+    searchByTraits(people);
+    let eyeColorResults = stringOfFire(foundTrait);
+    alert(eyeColorResults);
+     //function check eye color
+  break;
+  case "occupation":
+    searchByTraits(people);
+    let occupationResults = stringOfFire(foundTrait);
+    alert(occupationResults);
+     //function check occupation
+  break;
+ }
