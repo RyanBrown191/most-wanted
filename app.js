@@ -12,6 +12,7 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
+      let pickAdventure = decideSearch(); 
       searchResults = searchByTraits(people);
       let traitsAsString = stringOfFire(searchResults); 
        alert(traitsAsString);
@@ -132,68 +133,81 @@ function chars(input){
 }
 
 function searchByTraits(people){
-   let foundTrait = people.filter(function(person){
-    if(person.traitChoice === traitChoice ){
-      return true;
-    }
-    else{
-      return false;
-    }
-  })
+  let foundPersonArray = people 
+  let traitChoice = prompt("Select one criterion. gender, dob, height, weight, eye color, or occupation".trim());
+  switch(traitChoice){
+    case "gender":
+      let userInput = prompt("Please enter gender type. male or female")
+      foundPersonArray = foundPersonArray.filter(function(person){
+        if( userInput === person.gender){
+          return true;
+        }
+      })
+      let genderResults = stringOfFire(foundPersonArray);
+      alert(genderResults);
+      if(foundPersonArray.length === 1){
+        return foundPersonArray;
+      }
+      if(foundPersonArray.length === 0 || foundPersonArray.length > 1){
+        if(foundPersonArray.length === 0){searchByTraits(people);}
+        else{searchByTraits(foundPersonArray);}
+      
+      }
+      //function check gender
+    break;
+    case "dob":
+      searchByTraits(people);
+      let dobResults = stringOfFire(foundTrait);
+      alert(dobResults);
+      //function check dob
+    break;
+    case "height":
+      searchByTraits(people);
+      let heightResults = stringOfFire(foundTrait);
+      alert(heightResults);
+      //function check height
+    break;
+    case "weight":
+      searchByTraits(people);
+      let weightResults = stringOfFire(foundTrait);
+      alert(weightResults);
+      //function check weight
+    break;
+    case "eye color":
+      searchByTraits(people);
+      let eyeColorResults = stringOfFire(foundTrait);
+      alert(eyeColorResults);
+      //function check eye color
+    break;
+    case "occupation":
+      searchByTraits(people);
+      let occupationResults = stringOfFire(foundTrait);
+      alert(occupationResults);
+      //function check occupation
+    break;
+    default:
+      app(people); // restart app
+        break;
+  }
+
   // TODO: find the person using the name they entered
-  return foundTrait;
+  return foundPersonArray;
 }
 
 function stringOfFire(array){
   let foundPeopleString = "";
   for(let i = 0; i < array.length; i++){
-    foundPeopleString += (array[i].firstName, " ", array[i].lastName) + "\n";
+    foundPeopleString += (array[i].firstName + " " + array[i].lastName) + "\n";
   }
   return foundPeopleString
 }
-
-let chooseAdventure = prompt("Would you like to search by one criterion or multiple?");
- if (chooseAdventure = "one") {
-   let traitChoice = prompt("Select one criterion. gender, dob, height, weight, eye color, or occupation".trim());
+function decideSearch(string){
+let pickAdventure = prompt("Would you like to search by one criterion or multiple?");
+ if (pickAdventure = "one") {
+   return pickAdventure;
  }
- else if (chooseAdventure = "multiple"){
+ else if (pickAdventure = "multiple"){
    // select multiple traits 
  }
- switch(traitChoice){
-  case "gender":
-    searchByTraits(people);
-    let genderResults = stringOfFire(foundTrait);
-    alert(genderResults);
-     //function check gender
-  break;
-  case "dob":
-    searchByTraits(people);
-    let dobResults = stringOfFire(foundTrait);
-    alert(dobResults);
-     //function check dob
-  break;
-  case "height":
-    searchByTraits(people);
-    let heightResults = stringOfFire(foundTrait);
-    alert(heightResults);
-     //function check height
-  break;
-  case "weight":
-    searchByTraits(people);
-    let weightResults = stringOfFire(foundTrait);
-    alert(weightResults);
-     //function check weight
-  break;
-  case "eye color":
-    searchByTraits(people);
-    let eyeColorResults = stringOfFire(foundTrait);
-    alert(eyeColorResults);
-     //function check eye color
-  break;
-  case "occupation":
-    searchByTraits(people);
-    let occupationResults = stringOfFire(foundTrait);
-    alert(occupationResults);
-     //function check occupation
-  break;
- }
+}
+
