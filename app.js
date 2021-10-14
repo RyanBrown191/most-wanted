@@ -67,17 +67,23 @@ function mainMenu(person, people){
     // TODO: get person's family
     break;
     case "descendants":
-      // let x;
-      //  function recursiveDescendant(person){
-      //    for (people = 0; people < people.length; people++)
-      //       if (person[0].id === people.parents){
-      //         return people[0];
-      //      }
-      //      else{
-      //        return recursiveDescendant(person);
-      //      }
-      // }
-      //  let descendants = recursiveDescendant(person);
+      let descendantResults = descendantRecursion(person[0], people); 
+      function descendantRecursion(person, people){
+        let foundDescendantArray = people
+        foundDescendantArray = foundDescendantArray.filter(function(people){
+          if (person.id == people.parents[0] || person.id == people.parents[1]){
+            return true;
+          }
+          if(foundDescendantArray.length === 0){alert("No Descendants");}
+        })
+        let foundDescendantCat = foundDescendantArray
+        for (let i=0; i < foundDescendantCat.length; i++){
+          descendantRecursion(foundDescendantCat.concat(foundDescendantArray));
+           
+        }
+        return foundDescendantCat
+      }
+      alert(foundDescendantArray);
         
     // TODO: get person's descendants
     break;
@@ -282,4 +288,11 @@ let pickAdventure = prompt("Would you like to search by one criterion or multipl
    // select multiple traits 
  }
 }
+
+
+
+
+
+
+
 
